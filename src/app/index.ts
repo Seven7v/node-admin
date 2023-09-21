@@ -2,9 +2,11 @@ const koa = require('koa')
 //解析请求参数的
 const bodyParser = require('koa-bodyparser')
 const userRouter = require('../router/user')
+const errorHandler = require('./error-handle') //处理错误函数
 
 const app = new koa()
 
+app.on('error', errorHandler)
 app.use(bodyParser()) //解析请求参数的
 // 调用router.routes()来组装匹配好的路由，返回一个合并好的中间件
 app.use(userRouter.routes())

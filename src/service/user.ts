@@ -1,21 +1,37 @@
 const connection = require('../app/database')
+var jwt = require('jsonwebtoken')
 import { UserReq } from '../type/user'
+import { CommonRes } from '../type/common'
+
+const crypto = require('crypto')
 
 class UserService {
   async create(user: UserReq) {
-    console.log('user存数据库', user)
     const { username, password } = user
     const statement = `INSERT INTO users (name, password) VALUES (?, ?);`
     const result = await connection.execute(statement, [username, password])
+    const res: CommonRes = {
+      code: 200,
+      message: '创建成功'
+    }
     // 将user 存储到数据库
-    return result
+    return res
   }
   //登录
   async login(user: UserReq) {
-    console.log('登录', user)
-    const { username, password } = user
-    const statement = `INSERT INTO users (name, password) VALUES (?, ?);`
-    const result = await connection.execute(statement, [username, password])
+    let token = jwt.sign(user, 'shhhhh')
+    const result = {
+      code: 200,
+      message: '登录成功！',
+      token: token
+    }
+    return result
+  }
+
+  //查询用户是否存在
+  async getUserByName(name: string) {
+    const statement = `SELECT * FROM users WHERE name = ?;`
+    const result = await connection.execute(statement, [name])
     return result
   }
 }

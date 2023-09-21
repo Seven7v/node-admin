@@ -16,17 +16,9 @@ class UserController {
     // 获取用户请求参数
     const user = ctx.request.body
     // 查数据库
-    const res: CommonRes = {
-      code: 200,
-      message: '创建成功'
-    }
-    try {
-      const result = await service.create(user)
-    } catch (err: any) {
-      res.code = 500
-    }
+    const result = await service.create(user)
     // 返回数据
-    ctx.body = res
+    ctx.body = result
   }
 }
 
