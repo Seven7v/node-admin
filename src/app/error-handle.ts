@@ -15,6 +15,10 @@ const errorHandler = (error: any, ctx: any) => {
       status = 400
       message = '用户名已存在'
       break
+    case errorType.USER_NOT_LOGIN:
+      status = 400
+      message = '用户未登录'
+      break
     default:
       status = 404
       message = 'NOT FOUND'
