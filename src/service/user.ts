@@ -7,6 +7,17 @@ class UserService {
   async create(user: UserReq) {
     const { username, password } = user
     const statement = `INSERT INTO users (name, password) VALUES (?, ?);`
+    const createUsersTable = `CREATE TABLE IF NOT EXISTS users(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	username VARCHAR(20) NOT NULL UNIQUE,
+	password VARCHAR(50) NOT NULL,
+	createAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`
+    try {
+      const createResq = await connection.query(createUsersTable)
+    } catch (error) {
+      console.log(error)
+    }
     const result = await connection.execute(statement, [username, password])
     const res: CommonRes = {
       code: 200,
