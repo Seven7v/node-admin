@@ -3,3 +3,9 @@ export interface loginTimeReq {
   ip: string
   loginTime: string
 }
+
+export interface sendMessageReq {
+  message: string
+  username: string
+  sendTime: string
+}
