@@ -26,6 +26,20 @@ class DataController {
     }
     ctx.body = resq
   }
+
+  async getDashBord(ctx: any) {
+    const resq: CommonRes = {
+      code: 200,
+      message: ''
+    }
+    try {
+      const result = await service.getDashBord()
+      resq.data = result
+    } catch (err) {
+      console.log(err)
+    }
+    ctx.body = resq
+  }
 }
 
 module.exports = new DataController()

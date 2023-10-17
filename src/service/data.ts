@@ -50,5 +50,20 @@ class DataService {
     }
     return result
   }
+
+  async getDashBord() {
+    const searchUserSql = `SELECT * FROM  login_time;`
+    const loginList = await connection.execute(searchUserSql)
+    const searchMessageSql = `SELECT * FROM  message_list;`
+    const messageList = await connection.execute(searchMessageSql)
+    let resq = {
+      loginCount: loginList[0].length,
+      messageCount: messageList[0].length,
+      // 数据库无数据，随机生成
+      payCount: Math.ceil(Math.random() * 1000),
+      keyWord: Math.ceil(Math.random() * 50)
+    }
+    return resq
+  }
 }
 module.exports = new DataService()
