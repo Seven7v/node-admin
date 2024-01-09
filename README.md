@@ -44,6 +44,13 @@ mysqladmin -u root password "new_password";
 ./mysql -u root -p
 Enter password:*******
 ```
+创建数据库
+
+```
+create DATABASE ADMIN
+
+use ADMIN // 切换数据库
+```
 
 项目中安装mysql
 
